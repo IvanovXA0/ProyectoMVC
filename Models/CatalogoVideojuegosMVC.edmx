@@ -1,0 +1,470 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="CatalogoVideojuegosMVCModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Distribuidores">
+          <Key>
+            <PropertyRef Name="DistribuidorID" />
+          </Key>
+          <Property Name="DistribuidorID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" />
+          <Property Name="PaisDistribuidor" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Estudios">
+          <Key>
+            <PropertyRef Name="EstudioID" />
+          </Key>
+          <Property Name="EstudioID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Estudio" Type="varchar" MaxLength="50" />
+          <Property Name="PaisEstudio" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Generos">
+          <Key>
+            <PropertyRef Name="GeneroID" />
+          </Key>
+          <Property Name="GeneroID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Genero" Type="varchar" MaxLength="50" />
+          <Property Name="JuegoID" Type="int" />
+        </EntityType>
+        <EntityType Name="Juegos">
+          <Key>
+            <PropertyRef Name="JuegoID" />
+          </Key>
+          <Property Name="JuegoID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="250" />
+          <Property Name="GeneroID" Type="int" />
+          <Property Name="PlataformaID" Type="int" />
+          <Property Name="EstudioID" Type="int" />
+          <Property Name="DistribuidorID" Type="int" />
+          <Property Name="AnioPublicacion" Type="int" />
+          <Property Name="MotorID" Type="int" />
+          <Property Name="UrlPortada" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="Motores">
+          <Key>
+            <PropertyRef Name="MotorID" />
+          </Key>
+          <Property Name="MotorID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Motor" Type="varchar" MaxLength="50" />
+          <Property Name="VersionActual" Type="float" />
+          <Property Name="Freeware" Type="bit" />
+        </EntityType>
+        <EntityType Name="Plataformas">
+          <Key>
+            <PropertyRef Name="PlataformaID" />
+          </Key>
+          <Property Name="PlataformaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Plataforma" Type="varchar" MaxLength="20" />
+          <Property Name="JuegoID" Type="int" />
+        </EntityType>
+        <Association Name="FK__Generos__JuegoID__4BAC3F29">
+          <End Role="Juegos" Type="Self.Juegos" Multiplicity="0..1" />
+          <End Role="Generos" Type="Self.Generos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Juegos">
+              <PropertyRef Name="JuegoID" />
+            </Principal>
+            <Dependent Role="Generos">
+              <PropertyRef Name="JuegoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Juegos__Distribu__47DBAE45">
+          <End Role="Distribuidores" Type="Self.Distribuidores" Multiplicity="0..1" />
+          <End Role="Juegos" Type="Self.Juegos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Distribuidores">
+              <PropertyRef Name="DistribuidorID" />
+            </Principal>
+            <Dependent Role="Juegos">
+              <PropertyRef Name="DistribuidorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Juegos__EstudioI__46E78A0C">
+          <End Role="Estudios" Type="Self.Estudios" Multiplicity="0..1" />
+          <End Role="Juegos" Type="Self.Juegos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estudios">
+              <PropertyRef Name="EstudioID" />
+            </Principal>
+            <Dependent Role="Juegos">
+              <PropertyRef Name="EstudioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Juegos__GeneroID__48CFD27E">
+          <End Role="Generos" Type="Self.Generos" Multiplicity="0..1" />
+          <End Role="Juegos" Type="Self.Juegos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Generos">
+              <PropertyRef Name="GeneroID" />
+            </Principal>
+            <Dependent Role="Juegos">
+              <PropertyRef Name="GeneroID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Juegos__MotorID__49C3F6B7">
+          <End Role="Motores" Type="Self.Motores" Multiplicity="0..1" />
+          <End Role="Juegos" Type="Self.Juegos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Motores">
+              <PropertyRef Name="MotorID" />
+            </Principal>
+            <Dependent Role="Juegos">
+              <PropertyRef Name="MotorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Juegos__Platafor__4AB81AF0">
+          <End Role="Plataformas" Type="Self.Plataformas" Multiplicity="0..1" />
+          <End Role="Juegos" Type="Self.Juegos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Plataformas">
+              <PropertyRef Name="PlataformaID" />
+            </Principal>
+            <Dependent Role="Juegos">
+              <PropertyRef Name="PlataformaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Plataform__Juego__4CA06362">
+          <End Role="Juegos" Type="Self.Juegos" Multiplicity="0..1" />
+          <End Role="Plataformas" Type="Self.Plataformas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Juegos">
+              <PropertyRef Name="JuegoID" />
+            </Principal>
+            <Dependent Role="Plataformas">
+              <PropertyRef Name="JuegoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CatalogoVideojuegosMVCModelStoreContainer">
+          <EntitySet Name="Distribuidores" EntityType="Self.Distribuidores" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Estudios" EntityType="Self.Estudios" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Generos" EntityType="Self.Generos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Juegos" EntityType="Self.Juegos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Motores" EntityType="Self.Motores" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Plataformas" EntityType="Self.Plataformas" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Generos__JuegoID__4BAC3F29" Association="Self.FK__Generos__JuegoID__4BAC3F29">
+            <End Role="Juegos" EntitySet="Juegos" />
+            <End Role="Generos" EntitySet="Generos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Juegos__Distribu__47DBAE45" Association="Self.FK__Juegos__Distribu__47DBAE45">
+            <End Role="Distribuidores" EntitySet="Distribuidores" />
+            <End Role="Juegos" EntitySet="Juegos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Juegos__EstudioI__46E78A0C" Association="Self.FK__Juegos__EstudioI__46E78A0C">
+            <End Role="Estudios" EntitySet="Estudios" />
+            <End Role="Juegos" EntitySet="Juegos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Juegos__GeneroID__48CFD27E" Association="Self.FK__Juegos__GeneroID__48CFD27E">
+            <End Role="Generos" EntitySet="Generos" />
+            <End Role="Juegos" EntitySet="Juegos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Juegos__MotorID__49C3F6B7" Association="Self.FK__Juegos__MotorID__49C3F6B7">
+            <End Role="Motores" EntitySet="Motores" />
+            <End Role="Juegos" EntitySet="Juegos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Juegos__Platafor__4AB81AF0" Association="Self.FK__Juegos__Platafor__4AB81AF0">
+            <End Role="Plataformas" EntitySet="Plataformas" />
+            <End Role="Juegos" EntitySet="Juegos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Plataform__Juego__4CA06362" Association="Self.FK__Plataform__Juego__4CA06362">
+            <End Role="Juegos" EntitySet="Juegos" />
+            <End Role="Plataformas" EntitySet="Plataformas" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CatalogoVideojuegosMVCModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Distribuidores">
+          <Key>
+            <PropertyRef Name="DistribuidorID" />
+          </Key>
+          <Property Name="DistribuidorID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PaisDistribuidor" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Juegos" Relationship="Self.FK__Juegos__Distribu__47DBAE45" FromRole="Distribuidores" ToRole="Juegos" />
+        </EntityType>
+        <EntityType Name="Estudios">
+          <Key>
+            <PropertyRef Name="EstudioID" />
+          </Key>
+          <Property Name="EstudioID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Estudio" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PaisEstudio" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Juegos" Relationship="Self.FK__Juegos__EstudioI__46E78A0C" FromRole="Estudios" ToRole="Juegos" />
+        </EntityType>
+        <EntityType Name="Generos">
+          <Key>
+            <PropertyRef Name="GeneroID" />
+          </Key>
+          <Property Name="GeneroID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Genero" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="JuegoID" Type="Int32" />
+          <NavigationProperty Name="Juegos" Relationship="Self.FK__Generos__JuegoID__4BAC3F29" FromRole="Generos" ToRole="Juegos" />
+          <NavigationProperty Name="Juegos1" Relationship="Self.FK__Juegos__GeneroID__48CFD27E" FromRole="Generos" ToRole="Juegos" />
+        </EntityType>
+        <EntityType Name="Juegos">
+          <Key>
+            <PropertyRef Name="JuegoID" />
+          </Key>
+          <Property Name="JuegoID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="GeneroID" Type="Int32" />
+          <Property Name="PlataformaID" Type="Int32" />
+          <Property Name="EstudioID" Type="Int32" />
+          <Property Name="DistribuidorID" Type="Int32" />
+          <Property Name="AnioPublicacion" Type="Int32" />
+          <Property Name="MotorID" Type="Int32" />
+          <Property Name="UrlPortada" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Distribuidores" Relationship="Self.FK__Juegos__Distribu__47DBAE45" FromRole="Juegos" ToRole="Distribuidores" />
+          <NavigationProperty Name="Estudios" Relationship="Self.FK__Juegos__EstudioI__46E78A0C" FromRole="Juegos" ToRole="Estudios" />
+          <NavigationProperty Name="Generos" Relationship="Self.FK__Generos__JuegoID__4BAC3F29" FromRole="Juegos" ToRole="Generos" />
+          <NavigationProperty Name="Generos1" Relationship="Self.FK__Juegos__GeneroID__48CFD27E" FromRole="Juegos" ToRole="Generos" />
+          <NavigationProperty Name="Motores" Relationship="Self.FK__Juegos__MotorID__49C3F6B7" FromRole="Juegos" ToRole="Motores" />
+          <NavigationProperty Name="Plataformas" Relationship="Self.FK__Juegos__Platafor__4AB81AF0" FromRole="Juegos" ToRole="Plataformas" />
+          <NavigationProperty Name="Plataformas1" Relationship="Self.FK__Plataform__Juego__4CA06362" FromRole="Juegos" ToRole="Plataformas" />
+        </EntityType>
+        <EntityType Name="Motores">
+          <Key>
+            <PropertyRef Name="MotorID" />
+          </Key>
+          <Property Name="MotorID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Motor" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="VersionActual" Type="Double" />
+          <Property Name="Freeware" Type="Boolean" />
+          <NavigationProperty Name="Juegos" Relationship="Self.FK__Juegos__MotorID__49C3F6B7" FromRole="Motores" ToRole="Juegos" />
+        </EntityType>
+        <EntityType Name="Plataformas">
+          <Key>
+            <PropertyRef Name="PlataformaID" />
+          </Key>
+          <Property Name="PlataformaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Plataforma" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="JuegoID" Type="Int32" />
+          <NavigationProperty Name="Juegos" Relationship="Self.FK__Juegos__Platafor__4AB81AF0" FromRole="Plataformas" ToRole="Juegos" />
+          <NavigationProperty Name="Juegos1" Relationship="Self.FK__Plataform__Juego__4CA06362" FromRole="Plataformas" ToRole="Juegos" />
+        </EntityType>
+        <Association Name="FK__Juegos__Distribu__47DBAE45">
+          <End Role="Distribuidores" Type="Self.Distribuidores" Multiplicity="0..1" />
+          <End Role="Juegos" Type="Self.Juegos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Distribuidores">
+              <PropertyRef Name="DistribuidorID" />
+            </Principal>
+            <Dependent Role="Juegos">
+              <PropertyRef Name="DistribuidorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Juegos__EstudioI__46E78A0C">
+          <End Role="Estudios" Type="Self.Estudios" Multiplicity="0..1" />
+          <End Role="Juegos" Type="Self.Juegos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estudios">
+              <PropertyRef Name="EstudioID" />
+            </Principal>
+            <Dependent Role="Juegos">
+              <PropertyRef Name="EstudioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Generos__JuegoID__4BAC3F29">
+          <End Role="Juegos" Type="Self.Juegos" Multiplicity="0..1" />
+          <End Role="Generos" Type="Self.Generos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Juegos">
+              <PropertyRef Name="JuegoID" />
+            </Principal>
+            <Dependent Role="Generos">
+              <PropertyRef Name="JuegoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Juegos__GeneroID__48CFD27E">
+          <End Role="Generos" Type="Self.Generos" Multiplicity="0..1" />
+          <End Role="Juegos" Type="Self.Juegos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Generos">
+              <PropertyRef Name="GeneroID" />
+            </Principal>
+            <Dependent Role="Juegos">
+              <PropertyRef Name="GeneroID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Juegos__MotorID__49C3F6B7">
+          <End Role="Motores" Type="Self.Motores" Multiplicity="0..1" />
+          <End Role="Juegos" Type="Self.Juegos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Motores">
+              <PropertyRef Name="MotorID" />
+            </Principal>
+            <Dependent Role="Juegos">
+              <PropertyRef Name="MotorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Juegos__Platafor__4AB81AF0">
+          <End Role="Plataformas" Type="Self.Plataformas" Multiplicity="0..1" />
+          <End Role="Juegos" Type="Self.Juegos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Plataformas">
+              <PropertyRef Name="PlataformaID" />
+            </Principal>
+            <Dependent Role="Juegos">
+              <PropertyRef Name="PlataformaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Plataform__Juego__4CA06362">
+          <End Role="Juegos" Type="Self.Juegos" Multiplicity="0..1" />
+          <End Role="Plataformas" Type="Self.Plataformas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Juegos">
+              <PropertyRef Name="JuegoID" />
+            </Principal>
+            <Dependent Role="Plataformas">
+              <PropertyRef Name="JuegoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CatalogoVideojuegosMVCEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Distribuidores" EntityType="Self.Distribuidores" />
+          <EntitySet Name="Estudios" EntityType="Self.Estudios" />
+          <EntitySet Name="Generos" EntityType="Self.Generos" />
+          <EntitySet Name="Juegos" EntityType="Self.Juegos" />
+          <EntitySet Name="Motores" EntityType="Self.Motores" />
+          <EntitySet Name="Plataformas" EntityType="Self.Plataformas" />
+          <AssociationSet Name="FK__Juegos__Distribu__47DBAE45" Association="Self.FK__Juegos__Distribu__47DBAE45">
+            <End Role="Distribuidores" EntitySet="Distribuidores" />
+            <End Role="Juegos" EntitySet="Juegos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Juegos__EstudioI__46E78A0C" Association="Self.FK__Juegos__EstudioI__46E78A0C">
+            <End Role="Estudios" EntitySet="Estudios" />
+            <End Role="Juegos" EntitySet="Juegos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Generos__JuegoID__4BAC3F29" Association="Self.FK__Generos__JuegoID__4BAC3F29">
+            <End Role="Juegos" EntitySet="Juegos" />
+            <End Role="Generos" EntitySet="Generos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Juegos__GeneroID__48CFD27E" Association="Self.FK__Juegos__GeneroID__48CFD27E">
+            <End Role="Generos" EntitySet="Generos" />
+            <End Role="Juegos" EntitySet="Juegos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Juegos__MotorID__49C3F6B7" Association="Self.FK__Juegos__MotorID__49C3F6B7">
+            <End Role="Motores" EntitySet="Motores" />
+            <End Role="Juegos" EntitySet="Juegos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Juegos__Platafor__4AB81AF0" Association="Self.FK__Juegos__Platafor__4AB81AF0">
+            <End Role="Plataformas" EntitySet="Plataformas" />
+            <End Role="Juegos" EntitySet="Juegos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Plataform__Juego__4CA06362" Association="Self.FK__Plataform__Juego__4CA06362">
+            <End Role="Juegos" EntitySet="Juegos" />
+            <End Role="Plataformas" EntitySet="Plataformas" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CatalogoVideojuegosMVCModelStoreContainer" CdmEntityContainer="CatalogoVideojuegosMVCEntities">
+          <EntitySetMapping Name="Distribuidores">
+            <EntityTypeMapping TypeName="CatalogoVideojuegosMVCModel.Distribuidores">
+              <MappingFragment StoreEntitySet="Distribuidores">
+                <ScalarProperty Name="DistribuidorID" ColumnName="DistribuidorID" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="PaisDistribuidor" ColumnName="PaisDistribuidor" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Estudios">
+            <EntityTypeMapping TypeName="CatalogoVideojuegosMVCModel.Estudios">
+              <MappingFragment StoreEntitySet="Estudios">
+                <ScalarProperty Name="EstudioID" ColumnName="EstudioID" />
+                <ScalarProperty Name="Estudio" ColumnName="Estudio" />
+                <ScalarProperty Name="PaisEstudio" ColumnName="PaisEstudio" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Generos">
+            <EntityTypeMapping TypeName="CatalogoVideojuegosMVCModel.Generos">
+              <MappingFragment StoreEntitySet="Generos">
+                <ScalarProperty Name="GeneroID" ColumnName="GeneroID" />
+                <ScalarProperty Name="Genero" ColumnName="Genero" />
+                <ScalarProperty Name="JuegoID" ColumnName="JuegoID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Juegos">
+            <EntityTypeMapping TypeName="CatalogoVideojuegosMVCModel.Juegos">
+              <MappingFragment StoreEntitySet="Juegos">
+                <ScalarProperty Name="JuegoID" ColumnName="JuegoID" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="GeneroID" ColumnName="GeneroID" />
+                <ScalarProperty Name="PlataformaID" ColumnName="PlataformaID" />
+                <ScalarProperty Name="EstudioID" ColumnName="EstudioID" />
+                <ScalarProperty Name="DistribuidorID" ColumnName="DistribuidorID" />
+                <ScalarProperty Name="AnioPublicacion" ColumnName="AnioPublicacion" />
+                <ScalarProperty Name="MotorID" ColumnName="MotorID" />
+                <ScalarProperty Name="UrlPortada" ColumnName="UrlPortada" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Motores">
+            <EntityTypeMapping TypeName="CatalogoVideojuegosMVCModel.Motores">
+              <MappingFragment StoreEntitySet="Motores">
+                <ScalarProperty Name="MotorID" ColumnName="MotorID" />
+                <ScalarProperty Name="Motor" ColumnName="Motor" />
+                <ScalarProperty Name="VersionActual" ColumnName="VersionActual" />
+                <ScalarProperty Name="Freeware" ColumnName="Freeware" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Plataformas">
+            <EntityTypeMapping TypeName="CatalogoVideojuegosMVCModel.Plataformas">
+              <MappingFragment StoreEntitySet="Plataformas">
+                <ScalarProperty Name="PlataformaID" ColumnName="PlataformaID" />
+                <ScalarProperty Name="Plataforma" ColumnName="Plataforma" />
+                <ScalarProperty Name="JuegoID" ColumnName="JuegoID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
