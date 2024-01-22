@@ -14,13 +14,6 @@ namespace ProyectoMVC.Models
     
     public partial class Juegos
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Juegos()
-        {
-            this.Generos = new HashSet<Generos>();
-            this.Plataformas1 = new HashSet<Plataformas>();
-        }
-    
         public int JuegoID { get; set; }
         public string Nombre { get; set; }
         public string Descripcion { get; set; }
@@ -34,12 +27,8 @@ namespace ProyectoMVC.Models
     
         public virtual Distribuidores Distribuidores { get; set; }
         public virtual Estudios Estudios { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Generos> Generos { get; set; }
-        public virtual Generos Generos1 { get; set; }
+        public virtual Generos Generos { get; set; }
         public virtual Motores Motores { get; set; }
         public virtual Plataformas Plataformas { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Plataformas> Plataformas1 { get; set; }
     }
 }

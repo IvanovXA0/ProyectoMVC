@@ -22,10 +22,8 @@ namespace ProyectoMVC.Models
     
         public int PlataformaID { get; set; }
         public string Plataforma { get; set; }
-        public Nullable<int> JuegoID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Juegos> Juegos { get; set; }
-        public virtual Juegos Juegos1 { get; set; }
     }
 }

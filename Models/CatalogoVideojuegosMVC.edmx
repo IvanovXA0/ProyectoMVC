@@ -27,7 +27,6 @@
           </Key>
           <Property Name="GeneroID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Genero" Type="varchar" MaxLength="50" />
-          <Property Name="JuegoID" Type="int" />
         </EntityType>
         <EntityType Name="Juegos">
           <Key>
@@ -59,20 +58,7 @@
           </Key>
           <Property Name="PlataformaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Plataforma" Type="varchar" MaxLength="20" />
-          <Property Name="JuegoID" Type="int" />
         </EntityType>
-        <Association Name="FK__Generos__JuegoID__4BAC3F29">
-          <End Role="Juegos" Type="Self.Juegos" Multiplicity="0..1" />
-          <End Role="Generos" Type="Self.Generos" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Juegos">
-              <PropertyRef Name="JuegoID" />
-            </Principal>
-            <Dependent Role="Generos">
-              <PropertyRef Name="JuegoID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__Juegos__Distribu__47DBAE45">
           <End Role="Distribuidores" Type="Self.Distribuidores" Multiplicity="0..1" />
           <End Role="Juegos" Type="Self.Juegos" Multiplicity="*" />
@@ -133,18 +119,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Plataform__Juego__4CA06362">
-          <End Role="Juegos" Type="Self.Juegos" Multiplicity="0..1" />
-          <End Role="Plataformas" Type="Self.Plataformas" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Juegos">
-              <PropertyRef Name="JuegoID" />
-            </Principal>
-            <Dependent Role="Plataformas">
-              <PropertyRef Name="JuegoID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="CatalogoVideojuegosMVCModelStoreContainer">
           <EntitySet Name="Distribuidores" EntityType="Self.Distribuidores" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Estudios" EntityType="Self.Estudios" Schema="dbo" store:Type="Tables" />
@@ -152,10 +126,6 @@
           <EntitySet Name="Juegos" EntityType="Self.Juegos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Motores" EntityType="Self.Motores" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Plataformas" EntityType="Self.Plataformas" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__Generos__JuegoID__4BAC3F29" Association="Self.FK__Generos__JuegoID__4BAC3F29">
-            <End Role="Juegos" EntitySet="Juegos" />
-            <End Role="Generos" EntitySet="Generos" />
-          </AssociationSet>
           <AssociationSet Name="FK__Juegos__Distribu__47DBAE45" Association="Self.FK__Juegos__Distribu__47DBAE45">
             <End Role="Distribuidores" EntitySet="Distribuidores" />
             <End Role="Juegos" EntitySet="Juegos" />
@@ -175,10 +145,6 @@
           <AssociationSet Name="FK__Juegos__Platafor__4AB81AF0" Association="Self.FK__Juegos__Platafor__4AB81AF0">
             <End Role="Plataformas" EntitySet="Plataformas" />
             <End Role="Juegos" EntitySet="Juegos" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Plataform__Juego__4CA06362" Association="Self.FK__Plataform__Juego__4CA06362">
-            <End Role="Juegos" EntitySet="Juegos" />
-            <End Role="Plataformas" EntitySet="Plataformas" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -210,9 +176,7 @@
           </Key>
           <Property Name="GeneroID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Genero" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="JuegoID" Type="Int32" />
-          <NavigationProperty Name="Juegos" Relationship="Self.FK__Generos__JuegoID__4BAC3F29" FromRole="Generos" ToRole="Juegos" />
-          <NavigationProperty Name="Juegos1" Relationship="Self.FK__Juegos__GeneroID__48CFD27E" FromRole="Generos" ToRole="Juegos" />
+          <NavigationProperty Name="Juegos" Relationship="Self.FK__Juegos__GeneroID__48CFD27E" FromRole="Generos" ToRole="Juegos" />
         </EntityType>
         <EntityType Name="Juegos">
           <Key>
@@ -230,11 +194,9 @@
           <Property Name="UrlPortada" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Distribuidores" Relationship="Self.FK__Juegos__Distribu__47DBAE45" FromRole="Juegos" ToRole="Distribuidores" />
           <NavigationProperty Name="Estudios" Relationship="Self.FK__Juegos__EstudioI__46E78A0C" FromRole="Juegos" ToRole="Estudios" />
-          <NavigationProperty Name="Generos" Relationship="Self.FK__Generos__JuegoID__4BAC3F29" FromRole="Juegos" ToRole="Generos" />
-          <NavigationProperty Name="Generos1" Relationship="Self.FK__Juegos__GeneroID__48CFD27E" FromRole="Juegos" ToRole="Generos" />
+          <NavigationProperty Name="Generos" Relationship="Self.FK__Juegos__GeneroID__48CFD27E" FromRole="Juegos" ToRole="Generos" />
           <NavigationProperty Name="Motores" Relationship="Self.FK__Juegos__MotorID__49C3F6B7" FromRole="Juegos" ToRole="Motores" />
           <NavigationProperty Name="Plataformas" Relationship="Self.FK__Juegos__Platafor__4AB81AF0" FromRole="Juegos" ToRole="Plataformas" />
-          <NavigationProperty Name="Plataformas1" Relationship="Self.FK__Plataform__Juego__4CA06362" FromRole="Juegos" ToRole="Plataformas" />
         </EntityType>
         <EntityType Name="Motores">
           <Key>
@@ -252,9 +214,7 @@
           </Key>
           <Property Name="PlataformaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Plataforma" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="JuegoID" Type="Int32" />
           <NavigationProperty Name="Juegos" Relationship="Self.FK__Juegos__Platafor__4AB81AF0" FromRole="Plataformas" ToRole="Juegos" />
-          <NavigationProperty Name="Juegos1" Relationship="Self.FK__Plataform__Juego__4CA06362" FromRole="Plataformas" ToRole="Juegos" />
         </EntityType>
         <Association Name="FK__Juegos__Distribu__47DBAE45">
           <End Role="Distribuidores" Type="Self.Distribuidores" Multiplicity="0..1" />
@@ -277,18 +237,6 @@
             </Principal>
             <Dependent Role="Juegos">
               <PropertyRef Name="EstudioID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Generos__JuegoID__4BAC3F29">
-          <End Role="Juegos" Type="Self.Juegos" Multiplicity="0..1" />
-          <End Role="Generos" Type="Self.Generos" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Juegos">
-              <PropertyRef Name="JuegoID" />
-            </Principal>
-            <Dependent Role="Generos">
-              <PropertyRef Name="JuegoID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -328,18 +276,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Plataform__Juego__4CA06362">
-          <End Role="Juegos" Type="Self.Juegos" Multiplicity="0..1" />
-          <End Role="Plataformas" Type="Self.Plataformas" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Juegos">
-              <PropertyRef Name="JuegoID" />
-            </Principal>
-            <Dependent Role="Plataformas">
-              <PropertyRef Name="JuegoID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="CatalogoVideojuegosMVCEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Distribuidores" EntityType="Self.Distribuidores" />
           <EntitySet Name="Estudios" EntityType="Self.Estudios" />
@@ -355,10 +291,6 @@
             <End Role="Estudios" EntitySet="Estudios" />
             <End Role="Juegos" EntitySet="Juegos" />
           </AssociationSet>
-          <AssociationSet Name="FK__Generos__JuegoID__4BAC3F29" Association="Self.FK__Generos__JuegoID__4BAC3F29">
-            <End Role="Juegos" EntitySet="Juegos" />
-            <End Role="Generos" EntitySet="Generos" />
-          </AssociationSet>
           <AssociationSet Name="FK__Juegos__GeneroID__48CFD27E" Association="Self.FK__Juegos__GeneroID__48CFD27E">
             <End Role="Generos" EntitySet="Generos" />
             <End Role="Juegos" EntitySet="Juegos" />
@@ -370,10 +302,6 @@
           <AssociationSet Name="FK__Juegos__Platafor__4AB81AF0" Association="Self.FK__Juegos__Platafor__4AB81AF0">
             <End Role="Plataformas" EntitySet="Plataformas" />
             <End Role="Juegos" EntitySet="Juegos" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Plataform__Juego__4CA06362" Association="Self.FK__Plataform__Juego__4CA06362">
-            <End Role="Juegos" EntitySet="Juegos" />
-            <End Role="Plataformas" EntitySet="Plataformas" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -405,7 +333,6 @@
               <MappingFragment StoreEntitySet="Generos">
                 <ScalarProperty Name="GeneroID" ColumnName="GeneroID" />
                 <ScalarProperty Name="Genero" ColumnName="Genero" />
-                <ScalarProperty Name="JuegoID" ColumnName="JuegoID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -440,7 +367,6 @@
               <MappingFragment StoreEntitySet="Plataformas">
                 <ScalarProperty Name="PlataformaID" ColumnName="PlataformaID" />
                 <ScalarProperty Name="Plataforma" ColumnName="Plataforma" />
-                <ScalarProperty Name="JuegoID" ColumnName="JuegoID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

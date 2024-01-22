@@ -17,15 +17,13 @@ namespace ProyectoMVC.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Generos()
         {
-            this.Juegos1 = new HashSet<Juegos>();
+            this.Juegos = new HashSet<Juegos>();
         }
     
         public int GeneroID { get; set; }
         public string Genero { get; set; }
-        public Nullable<int> JuegoID { get; set; }
     
-        public virtual Juegos Juegos { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Juegos> Juegos1 { get; set; }
+        public virtual ICollection<Juegos> Juegos { get; set; }
     }
 }

@@ -190,8 +190,8 @@
     <Content Include="Content\Site.css" />
     <Content Include="Models\CatalogoVideojuegosMVC.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>CatalogoVideojuegosMVC.Context.cs</LastGenOutput>
       <DependentUpon>CatalogoVideojuegosMVC.edmx</DependentUpon>
+      <LastGenOutput>CatalogoVideojuegosMVC.Context.cs</LastGenOutput>
     </Content>
     <Content Include="Models\CatalogoVideojuegosMVC.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -270,6 +270,12 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DTO\DTO.csproj">
+      <Project>{70b86790-ec95-4232-a46f-e04d106cf712}</Project>
+      <Name>DTO</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
